@@ -1,0 +1,31 @@
+package kotlinx.coroutines.channels;
+
+import kotlin.Unit;
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.CoroutineContext;
+import kotlin.coroutines.intrinsics.IntrinsicsKt__IntrinsicsJvmKt;
+import kotlin.jvm.functions.Function2;
+import kotlinx.coroutines.intrinsics.CancellableKt;
+import org.jetbrains.annotations.NotNull;
+
+/* JADX INFO: loaded from: classes.dex */
+final class LazyBroadcastCoroutine<E> extends BroadcastCoroutine<E> {
+    private final Continuation<Unit> continuation;
+
+    public LazyBroadcastCoroutine(@NotNull CoroutineContext coroutineContext, @NotNull BroadcastChannel<E> broadcastChannel, @NotNull Function2<? super ProducerScope<? super E>, ? super Continuation<? super Unit>, ? extends Object> function2) {
+        super(coroutineContext, broadcastChannel, false);
+        this.continuation = IntrinsicsKt__IntrinsicsJvmKt.createCoroutineUnintercepted(function2, this, this);
+    }
+
+    @Override // kotlinx.coroutines.channels.BroadcastCoroutine, kotlinx.coroutines.channels.BroadcastChannel
+    public ReceiveChannel<E> openSubscription() {
+        ReceiveChannel<E> receiveChannelOpenSubscription = get_channel().openSubscription();
+        start();
+        return receiveChannelOpenSubscription;
+    }
+
+    @Override // kotlinx.coroutines.JobSupport
+    public void onStart() throws Throwable {
+        CancellableKt.startCoroutineCancellable(this.continuation, this);
+    }
+}

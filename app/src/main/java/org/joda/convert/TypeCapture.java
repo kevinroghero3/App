@@ -1,0 +1,16 @@
+package org.joda.convert;
+
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
+
+/* JADX INFO: loaded from: classes6.dex */
+abstract class TypeCapture<T> {
+    TypeCapture() {
+    }
+
+    final Type capture() {
+        Type genericSuperclass = getClass().getGenericSuperclass();
+        Types.checkArgument(genericSuperclass instanceof ParameterizedType, "%s isn't parameterized", genericSuperclass);
+        return ((ParameterizedType) genericSuperclass).getActualTypeArguments()[0];
+    }
+}

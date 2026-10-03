@@ -1,0 +1,29 @@
+package kotlinx.coroutines.channels;
+
+import kotlin.coroutines.Continuation;
+import kotlin.coroutines.intrinsics.IntrinsicsKt__IntrinsicsKt;
+import kotlin.coroutines.jvm.internal.ContinuationImpl;
+import kotlin.coroutines.jvm.internal.DebugMetadata;
+import org.jetbrains.annotations.NotNull;
+
+/* JADX INFO: loaded from: classes.dex */
+@DebugMetadata(c = "kotlinx.coroutines.channels.BufferedChannel", f = "BufferedChannel.kt", i = {}, l = {759}, m = "receiveCatching-JP2dKIU$suspendImpl", n = {}, s = {})
+final class BufferedChannel$receiveCatching$1<E> extends ContinuationImpl {
+    int label;
+    /* synthetic */ Object result;
+    final /* synthetic */ BufferedChannel<E> this$0;
+
+    /* JADX WARN: 'super' call moved to the top of the method (can break code semantics) */
+    BufferedChannel$receiveCatching$1(BufferedChannel<E> bufferedChannel, Continuation<? super BufferedChannel$receiveCatching$1> continuation) {
+        super(continuation);
+        this.this$0 = bufferedChannel;
+    }
+
+    @Override // kotlin.coroutines.jvm.internal.BaseContinuationImpl
+    public final Object invokeSuspend(@NotNull Object obj) {
+        this.result = obj;
+        this.label |= Integer.MIN_VALUE;
+        Object objM6993receiveCatchingJP2dKIU$suspendImpl = BufferedChannel.m6993receiveCatchingJP2dKIU$suspendImpl(this.this$0, this);
+        return objM6993receiveCatchingJP2dKIU$suspendImpl == IntrinsicsKt__IntrinsicsKt.getCOROUTINE_SUSPENDED() ? objM6993receiveCatchingJP2dKIU$suspendImpl : ChannelResult.m7003boximpl(objM6993receiveCatchingJP2dKIU$suspendImpl);
+    }
+}

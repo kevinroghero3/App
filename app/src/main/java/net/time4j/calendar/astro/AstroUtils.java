@@ -1,0 +1,37 @@
+package net.time4j.calendar.astro;
+
+/* JADX INFO: loaded from: classes3.dex */
+class AstroUtils {
+    AstroUtils() {
+    }
+
+    static double gmst(double d) {
+        double dFloor = Math.floor(d);
+        double d2 = (d - 51544.5d) / 36525.0d;
+        double d3 = ((((((dFloor - 51544.5d) / 36525.0d) * 8640184.812866d) + 24110.54841d) + (((d - dFloor) * 86400.0d) * 1.0027379093d)) + (((0.093104d - (6.2E-6d * d2)) * d2) * d2)) / 86400.0d;
+        return (d3 - Math.floor(d3)) * 2.0d * 3.141592653589793d;
+    }
+
+    static double getRefraction(double d) {
+        return (1.02d / Math.tan(Math.toRadians((10.3d / (5.11d + d)) + d))) + 0.0019279d;
+    }
+
+    static double refractionFactorOfStdAtmosphere(int i) {
+        return Math.pow(1.0d - ((((double) i) * 0.0065d) / 288.15d), 4.255d);
+    }
+
+    static double toRange_0_360(double d) {
+        while (Double.compare(0.0d, d) > 0) {
+            d += 360.0d;
+        }
+        while (Double.compare(d, 360.0d) >= 0) {
+            d -= 360.0d;
+        }
+        return d;
+    }
+
+    static int hashCode(double d) {
+        long jDoubleToLongBits = Double.doubleToLongBits(d);
+        return (int) (jDoubleToLongBits ^ (jDoubleToLongBits >>> 32));
+    }
+}

@@ -1,0 +1,31 @@
+package org.apache.commons.lang3;
+
+import ch.qos.logback.core.CoreConstants;
+import com.google.firebase.sessions.settings.RemoteSettings;
+
+/* JADX INFO: loaded from: classes6.dex */
+public class ClassPathUtils {
+    public static String toFullyQualifiedName(Class<?> cls, String str) {
+        Validate.notNull(cls, "Parameter '%s' must not be null!", CoreConstants.CONTEXT_SCOPE_VALUE);
+        Validate.notNull(str, "Parameter '%s' must not be null!", "resourceName");
+        return toFullyQualifiedName(cls.getPackage(), str);
+    }
+
+    public static String toFullyQualifiedName(Package r2, String str) {
+        Validate.notNull(r2, "Parameter '%s' must not be null!", CoreConstants.CONTEXT_SCOPE_VALUE);
+        Validate.notNull(str, "Parameter '%s' must not be null!", "resourceName");
+        return r2.getName() + "." + str;
+    }
+
+    public static String toFullyQualifiedPath(Class<?> cls, String str) {
+        Validate.notNull(cls, "Parameter '%s' must not be null!", CoreConstants.CONTEXT_SCOPE_VALUE);
+        Validate.notNull(str, "Parameter '%s' must not be null!", "resourceName");
+        return toFullyQualifiedPath(cls.getPackage(), str);
+    }
+
+    public static String toFullyQualifiedPath(Package r3, String str) {
+        Validate.notNull(r3, "Parameter '%s' must not be null!", CoreConstants.CONTEXT_SCOPE_VALUE);
+        Validate.notNull(str, "Parameter '%s' must not be null!", "resourceName");
+        return r3.getName().replace('.', '/') + RemoteSettings.FORWARD_SLASH_STRING + str;
+    }
+}
