@@ -1,0 +1,54 @@
+package com.reactnativekeyboardcontroller.extensions;
+
+import com.facebook.react.bridge.Arguments;
+import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.bridge.WritableArray;
+import com.facebook.react.bridge.WritableMap;
+import com.facebook.react.modules.core.DeviceEventManagerModule;
+import com.facebook.react.uimanager.ThemedReactContext;
+import com.facebook.react.uimanager.UIManagerHelper;
+import com.facebook.react.uimanager.events.Event;
+import com.facebook.react.uimanager.events.EventDispatcher;
+import com.reactnativekeyboardcontroller.log.Logger;
+import kotlin.jvm.internal.Intrinsics;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+/* JADX INFO: loaded from: classes3.dex */
+public final class ThemedReactContextKt {
+    public static final void dispatchEvent(@Nullable ThemedReactContext themedReactContext, int i, @NotNull Event<?> event) {
+        Intrinsics.checkNotNullParameter(event, "event");
+        Intrinsics.checkNotNull(themedReactContext, "null cannot be cast to non-null type com.facebook.react.bridge.ReactContext");
+        EventDispatcher eventDispatcherForReactTag = UIManagerHelper.getEventDispatcherForReactTag(themedReactContext, i);
+        if (eventDispatcherForReactTag != null) {
+            eventDispatcherForReactTag.dispatchEvent(event);
+        }
+    }
+
+    public static final void emitEvent(@Nullable ThemedReactContext themedReactContext, @NotNull String event, @NotNull WritableMap params) {
+        ReactApplicationContext reactApplicationContext;
+        DeviceEventManagerModule.RCTDeviceEventEmitter rCTDeviceEventEmitter;
+        Intrinsics.checkNotNullParameter(event, "event");
+        Intrinsics.checkNotNullParameter(params, "params");
+        if (themedReactContext != null && (reactApplicationContext = themedReactContext.getReactApplicationContext()) != null && (rCTDeviceEventEmitter = (DeviceEventManagerModule.RCTDeviceEventEmitter) reactApplicationContext.getJSModule(DeviceEventManagerModule.RCTDeviceEventEmitter.class)) != null) {
+            rCTDeviceEventEmitter.emit(event, params);
+        }
+        Logger.i$default(Logger.INSTANCE, "ThemedReactContext", event, null, 4, null);
+    }
+
+    public static final void keepShadowNodesInSync(@Nullable ThemedReactContext themedReactContext, int i) {
+        ReactApplicationContext reactApplicationContext;
+        WritableArray writableArrayCreateArray = Arguments.createArray();
+        writableArrayCreateArray.pushInt(new int[]{i}[0]);
+        WritableMap writableMapCreateMap = Arguments.createMap();
+        writableMapCreateMap.putArray("tags", writableArrayCreateArray);
+        if (themedReactContext == null || (reactApplicationContext = themedReactContext.getReactApplicationContext()) == null) {
+            return;
+        }
+        reactApplicationContext.emitDeviceEvent("onUserDrivenAnimationEnded", writableMapCreateMap);
+    }
+
+    public static final String getAppearance(@Nullable ThemedReactContext themedReactContext) {
+        return (themedReactContext != null && ContextKt.isSystemDarkMode(themedReactContext)) ? "dark" : "light";
+    }
+}

@@ -1,0 +1,11 @@
+package com.google.android.gms.internal.mlkit_vision_barcode;
+
+/* JADX INFO: loaded from: classes2.dex */
+final class zzf implements zzd {
+    private zzf() {
+        throw null;
+    }
+
+    /* synthetic */ zzf(zze zzeVar) {
+    }
+}

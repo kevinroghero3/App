@@ -1,0 +1,44 @@
+package com.reactnativecommunity.asyncstorage;
+
+import java.util.ArrayDeque;
+import java.util.concurrent.Executor;
+
+/* JADX INFO: loaded from: classes3.dex */
+public class SerialExecutor implements Executor {
+    private final Executor executor;
+    private Runnable mActive;
+    private final ArrayDeque<Runnable> mTasks = new ArrayDeque<>();
+
+    public SerialExecutor(Executor executor) {
+        this.executor = executor;
+    }
+
+    @Override // java.util.concurrent.Executor
+    public void execute(final Runnable runnable) {
+        synchronized (this) {
+            this.mTasks.offer(new Runnable() { // from class: com.reactnativecommunity.asyncstorage.SerialExecutor.1
+                @Override // java.lang.Runnable
+                public void run() {
+                    try {
+                        runnable.run();
+                    } finally {
+                        SerialExecutor.this.scheduleNext();
+                    }
+                }
+            });
+            if (this.mActive == null) {
+                scheduleNext();
+            }
+        }
+    }
+
+    void scheduleNext() {
+        synchronized (this) {
+            Runnable runnablePoll = this.mTasks.poll();
+            this.mActive = runnablePoll;
+            if (runnablePoll != null) {
+                this.executor.execute(runnablePoll);
+            }
+        }
+    }
+}

@@ -1,0 +1,96 @@
+package com.google.android.gms.fido.u2f.api.common;
+
+import android.os.Parcel;
+import android.os.Parcelable;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import com.google.android.gms.common.internal.Objects;
+import com.google.android.gms.common.internal.Preconditions;
+import com.google.android.gms.common.internal.safeparcel.SafeParcelWriter;
+import com.google.android.gms.common.internal.safeparcel.SafeParcelable;
+import com.google.android.gms.internal.fido.zzaj;
+import com.google.android.gms.internal.fido.zzak;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+/* JADX INFO: loaded from: classes4.dex */
+@Deprecated
+public class ErrorResponseData extends ResponseData {
+    public static final Parcelable.Creator<ErrorResponseData> CREATOR = new zzd();
+    public static final String JSON_ERROR_CODE = "errorCode";
+    public static final String JSON_ERROR_MESSAGE = "errorMessage";
+    private final ErrorCode zza;
+    private final String zzb;
+
+    ErrorResponseData(@SafeParcelable.Param(id = 2) int i, @SafeParcelable.Param(id = 3) String str) {
+        this.zza = ErrorCode.toErrorCode(i);
+        this.zzb = str;
+    }
+
+    public boolean equals(@Nullable Object obj) {
+        if (!(obj instanceof ErrorResponseData)) {
+            return false;
+        }
+        ErrorResponseData errorResponseData = (ErrorResponseData) obj;
+        return Objects.equal(this.zza, errorResponseData.zza) && Objects.equal(this.zzb, errorResponseData.zzb);
+    }
+
+    public ErrorCode getErrorCode() {
+        return this.zza;
+    }
+
+    public int getErrorCodeAsInt() {
+        return this.zza.getCode();
+    }
+
+    public String getErrorMessage() {
+        return this.zzb;
+    }
+
+    public int hashCode() {
+        return Objects.hashCode(this.zza, this.zzb);
+    }
+
+    @Override // com.google.android.gms.fido.u2f.api.common.ResponseData
+    public final JSONObject toJsonObject() {
+        JSONObject jSONObject = new JSONObject();
+        try {
+            jSONObject.put("errorCode", this.zza.getCode());
+            String str = this.zzb;
+            if (str != null) {
+                jSONObject.put("errorMessage", str);
+            }
+            return jSONObject;
+        } catch (JSONException e) {
+            throw new RuntimeException(e);
+        }
+    }
+
+    public String toString() {
+        zzaj zzajVarZza = zzak.zza(this);
+        zzajVarZza.zza("errorCode", this.zza.getCode());
+        String str = this.zzb;
+        if (str != null) {
+            zzajVarZza.zzb("errorMessage", str);
+        }
+        return zzajVarZza.toString();
+    }
+
+    @Override // android.os.Parcelable
+    public void writeToParcel(@NonNull Parcel parcel, int i) {
+        int iBeginObjectHeader = SafeParcelWriter.beginObjectHeader(parcel);
+        SafeParcelWriter.writeInt(parcel, 2, getErrorCodeAsInt());
+        SafeParcelWriter.writeString(parcel, 3, getErrorMessage(), false);
+        SafeParcelWriter.finishObjectHeader(parcel, iBeginObjectHeader);
+    }
+
+    public ErrorResponseData(@NonNull ErrorCode errorCode) {
+        this.zza = (ErrorCode) Preconditions.checkNotNull(errorCode);
+        this.zzb = null;
+    }
+
+    public ErrorResponseData(@NonNull ErrorCode errorCode, @NonNull String str) {
+        this.zza = (ErrorCode) Preconditions.checkNotNull(errorCode);
+        this.zzb = str;
+    }
+}

@@ -1,0 +1,15 @@
+package com.google.android.gms.auth.api.identity;
+
+import android.content.Intent;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import com.google.android.gms.common.api.ApiException;
+import com.google.android.gms.common.api.HasApiKey;
+import com.google.android.gms.tasks.Task;
+
+/* JADX INFO: loaded from: classes4.dex */
+public interface AuthorizationClient extends HasApiKey<zbc> {
+    Task<AuthorizationResult> authorize(@NonNull AuthorizationRequest authorizationRequest);
+
+    AuthorizationResult getAuthorizationResultFromIntent(@Nullable Intent intent) throws ApiException;
+}

@@ -1,0 +1,17 @@
+package com.google.firebase.iid;
+
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.Task;
+
+/* JADX INFO: loaded from: classes5.dex */
+final /* synthetic */ class Registrar$FIIDInternalAdapter$$Lambda$0 implements Continuation {
+    static final Continuation $instance = new Registrar$FIIDInternalAdapter$$Lambda$0();
+
+    private Registrar$FIIDInternalAdapter$$Lambda$0() {
+    }
+
+    @Override // com.google.android.gms.tasks.Continuation
+    public Object then(Task task) {
+        return ((InstanceIdResult) task.getResult()).getToken();
+    }
+}
