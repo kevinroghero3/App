@@ -1,0 +1,176 @@
+package androidx.camera.core.impl;
+
+import android.graphics.Rect;
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.camera.core.CameraControl;
+import androidx.camera.core.FocusMeteringAction;
+import androidx.camera.core.FocusMeteringResult;
+import androidx.camera.core.ImageCapture;
+import androidx.camera.core.imagecapture.CameraCapturePipeline;
+import androidx.camera.core.impl.utils.futures.Futures;
+import com.google.common.util.concurrent.ListenableFuture;
+import java.util.Collections;
+import java.util.List;
+
+/* JADX INFO: loaded from: classes2.dex */
+public interface CameraControlInternal extends CameraControl {
+    public static final CameraControlInternal DEFAULT_EMPTY_INSTANCE = new CameraControlInternal() { // from class: androidx.camera.core.impl.CameraControlInternal.2
+        @Override // androidx.camera.core.impl.CameraControlInternal
+        public void addInteropConfig(@NonNull Config config) {
+        }
+
+        @Override // androidx.camera.core.impl.CameraControlInternal
+        public void addZslConfig(@NonNull SessionConfig.Builder builder) {
+        }
+
+        @Override // androidx.camera.core.impl.CameraControlInternal
+        public void clearInteropConfig() {
+        }
+
+        @Override // androidx.camera.core.impl.CameraControlInternal
+        public int getFlashMode() {
+            return 2;
+        }
+
+        @Override // androidx.camera.core.impl.CameraControlInternal
+        public Config getInteropConfig() {
+            return null;
+        }
+
+        @Override // androidx.camera.core.impl.CameraControlInternal
+        public boolean isZslDisabledByByUserCaseConfig() {
+            return false;
+        }
+
+        @Override // androidx.camera.core.impl.CameraControlInternal
+        public void setFlashMode(int i) {
+        }
+
+        @Override // androidx.camera.core.impl.CameraControlInternal
+        public void setZslDisabledByUserCaseConfig(boolean z) {
+        }
+
+        @Override // androidx.camera.core.CameraControl
+        public ListenableFuture<Void> enableTorch(boolean z) {
+            return Futures.immediateFuture(null);
+        }
+
+        @Override // androidx.camera.core.CameraControl
+        public ListenableFuture<Integer> setExposureCompensationIndex(int i) {
+            return Futures.immediateFuture(0);
+        }
+
+        @Override // androidx.camera.core.impl.CameraControlInternal
+        public ListenableFuture<List<Void>> submitStillCaptureRequests(@NonNull List<CaptureConfig> list, int i, int i2) {
+            return Futures.immediateFuture(Collections.emptyList());
+        }
+
+        @Override // androidx.camera.core.impl.CameraControlInternal
+        public SessionConfig getSessionConfig() {
+            return SessionConfig.defaultEmptySessionConfig();
+        }
+
+        @Override // androidx.camera.core.impl.CameraControlInternal
+        public Rect getSensorRect() {
+            return new Rect();
+        }
+
+        @Override // androidx.camera.core.CameraControl
+        public ListenableFuture<FocusMeteringResult> startFocusAndMetering(@NonNull FocusMeteringAction focusMeteringAction) {
+            return Futures.immediateFuture(FocusMeteringResult.emptyInstance());
+        }
+
+        @Override // androidx.camera.core.CameraControl
+        public ListenableFuture<Void> cancelFocusAndMetering() {
+            return Futures.immediateFuture(null);
+        }
+
+        @Override // androidx.camera.core.CameraControl
+        public ListenableFuture<Void> setZoomRatio(float f) {
+            return Futures.immediateFuture(null);
+        }
+
+        @Override // androidx.camera.core.CameraControl
+        public ListenableFuture<Void> setLinearZoom(float f) {
+            return Futures.immediateFuture(null);
+        }
+    };
+
+    public interface ControlUpdateCallback {
+        void onCameraControlCaptureRequests(@NonNull List<CaptureConfig> list);
+
+        void onCameraControlUpdateSessionConfig();
+    }
+
+    void addInteropConfig(@NonNull Config config);
+
+    void addZslConfig(@NonNull SessionConfig.Builder builder);
+
+    void clearInteropConfig();
+
+    default void decrementVideoUsage() {
+    }
+
+    int getFlashMode();
+
+    default CameraControlInternal getImplementation() {
+        return this;
+    }
+
+    Config getInteropConfig();
+
+    Rect getSensorRect();
+
+    SessionConfig getSessionConfig();
+
+    default void incrementVideoUsage() {
+    }
+
+    default boolean isInVideoUsage() {
+        return false;
+    }
+
+    boolean isZslDisabledByByUserCaseConfig();
+
+    void setFlashMode(int i);
+
+    default void setScreenFlash(@Nullable ImageCapture.ScreenFlash screenFlash) {
+    }
+
+    void setZslDisabledByUserCaseConfig(boolean z);
+
+    ListenableFuture<List<Void>> submitStillCaptureRequests(@NonNull List<CaptureConfig> list, int i, int i2);
+
+    default ListenableFuture<CameraCapturePipeline> getCameraCapturePipelineAsync(int i, int i2) {
+        return Futures.immediateFuture(new CameraCapturePipeline() { // from class: androidx.camera.core.impl.CameraControlInternal.1
+            @Override // androidx.camera.core.imagecapture.CameraCapturePipeline
+            public ListenableFuture<Void> invokePreCapture() {
+                return Futures.immediateFuture(null);
+            }
+
+            @Override // androidx.camera.core.imagecapture.CameraCapturePipeline
+            public ListenableFuture<Void> invokePostCapture() {
+                return Futures.immediateFuture(null);
+            }
+        });
+    }
+
+    /* JADX INFO: loaded from: classes3.dex */
+    public static final class CameraControlException extends Exception {
+        private CameraCaptureFailure mCameraCaptureFailure;
+
+        public CameraControlException(@NonNull CameraCaptureFailure cameraCaptureFailure) {
+            this.mCameraCaptureFailure = cameraCaptureFailure;
+        }
+
+        public CameraControlException(@NonNull CameraCaptureFailure cameraCaptureFailure, @NonNull Throwable th) {
+            super(th);
+            this.mCameraCaptureFailure = cameraCaptureFailure;
+        }
+
+        public CameraCaptureFailure getCameraCaptureFailure() {
+            return this.mCameraCaptureFailure;
+        }
+    }
+}

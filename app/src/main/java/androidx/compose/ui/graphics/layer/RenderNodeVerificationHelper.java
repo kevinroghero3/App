@@ -1,0 +1,18 @@
+package androidx.compose.ui.graphics.layer;
+
+import android.graphics.RenderNode;
+import androidx.compose.ui.graphics.RenderEffect;
+import org.jetbrains.annotations.NotNull;
+import org.jetbrains.annotations.Nullable;
+
+/* JADX INFO: loaded from: classes4.dex */
+public final class RenderNodeVerificationHelper {
+    public static final RenderNodeVerificationHelper INSTANCE = new RenderNodeVerificationHelper();
+
+    private RenderNodeVerificationHelper() {
+    }
+
+    public final void setRenderEffect(@NotNull RenderNode renderNode, @Nullable RenderEffect renderEffect) {
+        renderNode.setRenderEffect(renderEffect != null ? renderEffect.asAndroidRenderEffect() : null);
+    }
+}

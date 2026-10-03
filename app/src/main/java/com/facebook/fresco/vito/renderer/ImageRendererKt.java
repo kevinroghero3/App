@@ -1,0 +1,5 @@
+package com.facebook.fresco.vito.renderer;
+
+/* JADX INFO: loaded from: classes4.dex */
+public final class ImageRendererKt {
+}

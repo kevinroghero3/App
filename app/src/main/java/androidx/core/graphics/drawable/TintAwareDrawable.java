@@ -1,0 +1,14 @@
+package androidx.core.graphics.drawable;
+
+import android.content.res.ColorStateList;
+import android.graphics.PorterDuff;
+import androidx.annotation.ColorInt;
+
+/* JADX INFO: loaded from: classes2.dex */
+public interface TintAwareDrawable {
+    void setTint(@ColorInt int i);
+
+    void setTintList(ColorStateList colorStateList);
+
+    void setTintMode(PorterDuff.Mode mode);
+}

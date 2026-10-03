@@ -1,0 +1,35 @@
+package android.adservices.topics;
+
+import androidx.annotation.NonNull;
+import java.util.List;
+
+/* JADX INFO: loaded from: classes.dex */
+public final class GetTopicsResponse {
+    GetTopicsResponse() {
+        throw new RuntimeException("Stub!");
+    }
+
+    @NonNull(TransformedVisibilityMarker = true)
+    public List<Topic> getTopics() {
+        throw new RuntimeException("Stub!");
+    }
+
+    public boolean equals(Object obj) {
+        throw new RuntimeException("Stub!");
+    }
+
+    public int hashCode() {
+        throw new RuntimeException("Stub!");
+    }
+
+    public static final class Builder {
+        public Builder(@NonNull List<Topic> list) {
+            throw new RuntimeException("Stub!");
+        }
+
+        @NonNull(TransformedVisibilityMarker = true)
+        public GetTopicsResponse build() {
+            throw new RuntimeException("Stub!");
+        }
+    }
+}

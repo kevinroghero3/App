@@ -1,0 +1,58 @@
+package com.facebook.react.uimanager.style;
+
+import java.util.Locale;
+import kotlin.enums.EnumEntries;
+import kotlin.enums.EnumEntriesKt;
+import kotlin.jvm.JvmStatic;
+import kotlin.jvm.internal.DefaultConstructorMarker;
+import kotlin.jvm.internal.Intrinsics;
+import org.jetbrains.annotations.NotNull;
+
+/* JADX INFO: loaded from: classes.dex */
+public enum OutlineStyle {
+    SOLID,
+    DASHED,
+    DOTTED;
+
+    private static final /* synthetic */ EnumEntries $ENTRIES = EnumEntriesKt.enumEntries(values());
+    public static final Companion Companion = new Companion(null);
+
+    @JvmStatic
+    public static final OutlineStyle fromString(@NotNull String str) {
+        return Companion.fromString(str);
+    }
+
+    public static EnumEntries<OutlineStyle> getEntries() {
+        return $ENTRIES;
+    }
+
+    /* JADX INFO: loaded from: classes2.dex */
+    public static final class Companion {
+        public /* synthetic */ Companion(DefaultConstructorMarker defaultConstructorMarker) {
+            this();
+        }
+
+        private Companion() {
+        }
+
+        @JvmStatic
+        public final OutlineStyle fromString(@NotNull String outlineStyle) {
+            Intrinsics.checkNotNullParameter(outlineStyle, "outlineStyle");
+            String lowerCase = outlineStyle.toLowerCase(Locale.ROOT);
+            Intrinsics.checkNotNullExpressionValue(lowerCase, "toLowerCase(...)");
+            int iHashCode = lowerCase.hashCode();
+            if (iHashCode != -1338941519) {
+                if (iHashCode != -1325970902) {
+                    if (iHashCode == 109618859 && lowerCase.equals("solid")) {
+                        return OutlineStyle.SOLID;
+                    }
+                } else if (lowerCase.equals("dotted")) {
+                    return OutlineStyle.DOTTED;
+                }
+            } else if (lowerCase.equals("dashed")) {
+                return OutlineStyle.DASHED;
+            }
+            return null;
+        }
+    }
+}

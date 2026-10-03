@@ -1,0 +1,24 @@
+package androidx.compose.runtime.snapshots;
+
+import org.jetbrains.annotations.NotNull;
+
+/* JADX INFO: loaded from: classes4.dex */
+public final class SnapshotIdSetKt {
+    public static final int binarySearch(@NotNull int[] iArr, int i) {
+        int length = iArr.length - 1;
+        int i2 = 0;
+        while (i2 <= length) {
+            int i3 = (i2 + length) >>> 1;
+            int i4 = iArr[i3];
+            if (i > i4) {
+                i2 = i3 + 1;
+            } else {
+                if (i >= i4) {
+                    return i3;
+                }
+                length = i3 - 1;
+            }
+        }
+        return -(i2 + 1);
+    }
+}

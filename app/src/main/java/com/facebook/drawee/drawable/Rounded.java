@@ -1,0 +1,36 @@
+package com.facebook.drawee.drawable;
+
+import org.jetbrains.annotations.NotNull;
+
+/* JADX INFO: loaded from: classes2.dex */
+public interface Rounded {
+    int getBorderColor();
+
+    float getBorderWidth();
+
+    float getPadding();
+
+    boolean getPaintFilterBitmap();
+
+    float[] getRadii();
+
+    boolean getScaleDownInsideBorders();
+
+    boolean isCircle();
+
+    void setBorder(int i, float f);
+
+    void setCircle(boolean z);
+
+    void setPadding(float f);
+
+    void setPaintFilterBitmap(boolean z);
+
+    void setRadii(@NotNull float[] fArr);
+
+    void setRadius(float f);
+
+    void setRepeatEdgePixels(boolean z);
+
+    void setScaleDownInsideBorders(boolean z);
+}

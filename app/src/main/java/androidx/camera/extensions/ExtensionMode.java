@@ -1,0 +1,22 @@
+package androidx.camera.extensions;
+
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
+
+/* JADX INFO: loaded from: classes3.dex */
+public final class ExtensionMode {
+    public static final int AUTO = 5;
+    public static final int BOKEH = 1;
+    public static final int FACE_RETOUCH = 4;
+    public static final int HDR = 2;
+    public static final int NIGHT = 3;
+    public static final int NONE = 0;
+
+    /* JADX INFO: loaded from: classes.dex */
+    @Retention(RetentionPolicy.SOURCE)
+    public @interface Mode {
+    }
+
+    private ExtensionMode() {
+    }
+}

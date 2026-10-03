@@ -1,0 +1,13 @@
+package androidx.camera.core.impl;
+
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+
+/* JADX INFO: loaded from: classes2.dex */
+public interface MutableConfig extends Config {
+    <ValueT> void insertOption(@NonNull Config.Option<ValueT> option, @NonNull Config.OptionPriority optionPriority, @Nullable ValueT valuet);
+
+    <ValueT> void insertOption(@NonNull Config.Option<ValueT> option, @Nullable ValueT valuet);
+
+    <ValueT> ValueT removeOption(@NonNull Config.Option<ValueT> option);
+}

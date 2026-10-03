@@ -1,0 +1,48 @@
+package com.facebook.imagepipeline.memory;
+
+import android.util.SparseIntArray;
+import kotlin.jvm.JvmStatic;
+
+/* JADX INFO: loaded from: classes2.dex */
+public final class DefaultNativeMemoryChunkPoolParams {
+    public static final DefaultNativeMemoryChunkPoolParams INSTANCE = new DefaultNativeMemoryChunkPoolParams();
+    private static final int LARGE_BUCKET_LENGTH = 2;
+    private static final int SMALL_BUCKET_LENGTH = 5;
+
+    private DefaultNativeMemoryChunkPoolParams() {
+    }
+
+    @JvmStatic
+    public static final PoolParams get() {
+        SparseIntArray sparseIntArray = new SparseIntArray();
+        sparseIntArray.put(1024, 5);
+        sparseIntArray.put(2048, 5);
+        sparseIntArray.put(4096, 5);
+        sparseIntArray.put(8192, 5);
+        sparseIntArray.put(16384, 5);
+        sparseIntArray.put(32768, 5);
+        sparseIntArray.put(65536, 5);
+        sparseIntArray.put(131072, 5);
+        sparseIntArray.put(262144, 2);
+        sparseIntArray.put(524288, 2);
+        sparseIntArray.put(1048576, 2);
+        DefaultNativeMemoryChunkPoolParams defaultNativeMemoryChunkPoolParams = INSTANCE;
+        return new PoolParams(defaultNativeMemoryChunkPoolParams.getMaxSizeSoftCap(), defaultNativeMemoryChunkPoolParams.getMaxSizeHardCap(), sparseIntArray);
+    }
+
+    private final int getMaxSizeSoftCap() {
+        int iMin = (int) Math.min(Runtime.getRuntime().maxMemory(), 2147483647L);
+        if (iMin < 16777216) {
+            return 3145728;
+        }
+        return iMin < 33554432 ? 6291456 : 12582912;
+    }
+
+    private final int getMaxSizeHardCap() {
+        int iMin = (int) Math.min(Runtime.getRuntime().maxMemory(), 2147483647L);
+        if (iMin < 16777216) {
+            return iMin / 2;
+        }
+        return (iMin / 4) * 3;
+    }
+}

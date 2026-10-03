@@ -1,0 +1,29 @@
+package androidx.profileinstaller;
+
+import androidx.annotation.NonNull;
+import java.util.TreeMap;
+
+/* JADX INFO: loaded from: classes4.dex */
+class DexProfileData {
+    final String apkName;
+    int classSetSize;
+    int[] classes;
+    final long dexChecksum;
+    final String dexName;
+    final int hotMethodRegionSize;
+    long mTypeIdCount;
+    final TreeMap<Integer, Integer> methods;
+    final int numMethodIds;
+
+    DexProfileData(@NonNull String str, @NonNull String str2, long j, long j2, int i, int i2, int i3, @NonNull int[] iArr, @NonNull TreeMap<Integer, Integer> treeMap) {
+        this.apkName = str;
+        this.dexName = str2;
+        this.dexChecksum = j;
+        this.mTypeIdCount = j2;
+        this.classSetSize = i;
+        this.hotMethodRegionSize = i2;
+        this.numMethodIds = i3;
+        this.classes = iArr;
+        this.methods = treeMap;
+    }
+}
